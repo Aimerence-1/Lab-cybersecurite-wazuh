@@ -1,0 +1,45 @@
+<!-- 
+    Règles personnalisées Wazuh - Lab Cybersécurité
+    Auteur : Fèmi Aimérence BOKO
+    École des Métiers du Numérique - 2026
+    
+    Emplacement : /var/ossec/etc/rules/local_rules.xml
+    
+    Après modification, redémarrer Wazuh :
+    sudo systemctl restart wazuh-manager
+-->
+
+<group name="local,sysmon,">
+
+  <!--
+    Règle 100001 - Exécution d'un exécutable depuis Downloads
+    Détecte tout processus lancé depuis le dossier Downloads d'un utilisateur.
+    Comportement anormal caractéristique d'un payload déposé par phishing.
+    MITRE ATT&CK : T1204.002 - User Execution - Malicious File
+  -->
+  <rule id="100001" level="8">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\Users\\.*\\Downloads\\.*\.exe</field>
+    <description>Execution d un executable depuis le dossier Downloads</description>
+    <mitre>
+      <id>T1204.002</id>
+    </mitre>
+  </rule>
+
+  <!--
+    Règle 100002 - Connexion réseau sortante depuis Downloads
+    Détecte une connexion TCP sortante initiée par un exécutable depuis Downloads.
+    Signature comportementale directe d'un reverse shell.
+    MITRE ATT&CK : T1071 - Application Layer Protocol (C2)
+  -->
+  <rule id="100002" level="10">
+    <if_group>sysmon_event3</if_group>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\Users\\.*\\Downloads\\.*\.exe</field>
+    <field name="win.eventdata.initiated">true</field>
+    <description>Connexion reseau sortante depuis un executable dans Downloads</description>
+    <mitre>
+      <id>T1071</id>
+    </mitre>
+  </rule>
+
+</group>
