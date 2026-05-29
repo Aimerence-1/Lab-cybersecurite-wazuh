@@ -7,20 +7,17 @@
 Ce lab permet de simuler une attaque cybersécurité en environnement contrôlé et d'observer sa détection en temps réel par le SIEM Wazuh. Il couvre l'installation complète d'un environnement de détection d'intrusions, la création de règles personnalisées et la simulation d'un reverse shell via Metasploit.
 
 ## Architecture
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Kali Linux    │     │   Windows 10    │     │  Ubuntu 24.04   │
-│   Attaquant     │────▶│    Victime      │────▶│  Wazuh SIEM     │
-│ 192.168.74.128  │     │ 192.168.74.130  │     │ 192.168.74.131  │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-     Metasploit          Sysmon + Agent            Dashboard
-     msfvenom             Wazuh                    Alertes
 
+"Kali Linux" (Attaquant): `192.168.74.128`  
 
-   Machine          Rôle                   OS                  IP 
- Wazuh Server     Analyseur SIEM       Ubuntu 24.04 LTS        192.168.74.131 
- Kali Linux      Attaquant             Kali Linux 2026.1       192.168.74.128 
- Windows 10       Victime              Windows 10 Pro 22H2     192.168.74.130 
+"Windows 10" (Victime): `192.168.74.130`  
 
+"Ubuntu/Wazuh" (Analyseur): `192.168.74.131`
+
+| Machine | Rôle | IP |
+| Ubuntu (Wazuh) | Analyseur SIEM | 192.168.74.131 |
+| Kali Linux | Attaquant | 192.168.74.128 |
+| Windows 10 | Victime | 192.168.74.130 |
 
 ## Technologies utilisées
 
