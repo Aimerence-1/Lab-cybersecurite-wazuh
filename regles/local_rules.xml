@@ -20,7 +20,7 @@
   <rule id="100001" level="8">
     <if_group>sysmon_event1</if_group>
     <field name="win.eventdata.image" type="pcre2">(?i)\\Users\\.*\\Downloads\\.*\.exe</field>
-    <description>Execution d un executable depuis le dossier Downloads</description>
+    <description>Exécution d'un exécutable depuis le dossier Downloads</description>
     <mitre>
       <id>T1204.002</id>
     </mitre>
@@ -36,7 +36,7 @@
     <if_group>sysmon_event3</if_group>
     <field name="win.eventdata.image" type="pcre2">(?i)\\Users\\.*\\Downloads\\.*\.exe</field>
     <field name="win.eventdata.initiated">true</field>
-    <description>Connexion reseau sortante depuis un executable dans Downloads</description>
+    <description>Connexion réseau sortante depuis un exécutable dans Downloads</description>
     <mitre>
       <id>T1071</id>
     </mitre>
